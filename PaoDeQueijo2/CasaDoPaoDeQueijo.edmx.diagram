@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e9e31586663142d09a395b4571d6dda9" Name="Diagram1" >
+        <EntityTypeShape EntityType="CasaDoPaoDeQueijo.Profile" Width="1.5" PointX="4" PointY="3.125" />
+        <EntityTypeShape EntityType="CasaDoPaoDeQueijo.Post" Width="1.5" PointX="8" PointY="1.875" />
+        <EntityTypeShape EntityType="CasaDoPaoDeQueijo.Comment" Width="1.5" PointX="10" PointY="1.875" />
+        <EntityTypeShape EntityType="CasaDoPaoDeQueijo.Like" Width="1.5" PointX="12" PointY="1.875" />
+        <EntityTypeShape EntityType="CasaDoPaoDeQueijo.Share" Width="1.5" PointX="8" PointY="4.375" />
+        <EntityTypeShape EntityType="CasaDoPaoDeQueijo.Friendship" Width="1.5" PointX="11.25" PointY="4.375" />
+        <AssociationConnector Association="CasaDoPaoDeQueijo.ProfilePost" />
+        <AssociationConnector Association="CasaDoPaoDeQueijo.ProfileComment" />
+        <AssociationConnector Association="CasaDoPaoDeQueijo.ProfileLike" />
+        <AssociationConnector Association="CasaDoPaoDeQueijo.ProfileShare" />
+        <AssociationConnector Association="CasaDoPaoDeQueijo.PostComment" />
+        <AssociationConnector Association="CasaDoPaoDeQueijo.PostLike" />
+        <AssociationConnector Association="CasaDoPaoDeQueijo.SharePost" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

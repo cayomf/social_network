@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="CasaDoPaoDeQueijo" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="CasaDoPaoDeQueijoContainer" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ProfileSet" EntityType="CasaDoPaoDeQueijo.Profile" />
+    <EntitySet Name="PostSet" EntityType="CasaDoPaoDeQueijo.Post" />
+    <EntitySet Name="CommentSet" EntityType="CasaDoPaoDeQueijo.Comment" />
+    <EntitySet Name="LikeSet" EntityType="CasaDoPaoDeQueijo.Like" />
+    <EntitySet Name="ShareSet" EntityType="CasaDoPaoDeQueijo.Share" />
+    <EntitySet Name="FriendshipSet" EntityType="CasaDoPaoDeQueijo.Friendship" />
+    <AssociationSet Name="ProfilePost" Association="CasaDoPaoDeQueijo.ProfilePost">
+      <End Role="Profile" EntitySet="ProfileSet" />
+      <End Role="Post" EntitySet="PostSet" />
+    </AssociationSet>
+    <AssociationSet Name="ProfileComment" Association="CasaDoPaoDeQueijo.ProfileComment">
+      <End Role="Profile" EntitySet="ProfileSet" />
+      <End Role="Comment" EntitySet="CommentSet" />
+    </AssociationSet>
+    <AssociationSet Name="ProfileLike" Association="CasaDoPaoDeQueijo.ProfileLike">
+      <End Role="Profile" EntitySet="ProfileSet" />
+      <End Role="Like" EntitySet="LikeSet" />
+    </AssociationSet>
+    <AssociationSet Name="ProfileShare" Association="CasaDoPaoDeQueijo.ProfileShare">
+      <End Role="Profile" EntitySet="ProfileSet" />
+      <End Role="Share" EntitySet="ShareSet" />
+    </AssociationSet>
+    <AssociationSet Name="PostComment" Association="CasaDoPaoDeQueijo.PostComment">
+      <End Role="Post" EntitySet="PostSet" />
+      <End Role="Comment" EntitySet="CommentSet" />
+    </AssociationSet>
+    <AssociationSet Name="PostLike" Association="CasaDoPaoDeQueijo.PostLike">
+      <End Role="Post" EntitySet="PostSet" />
+      <End Role="Like" EntitySet="LikeSet" />
+    </AssociationSet>
+    <AssociationSet Name="SharePost" Association="CasaDoPaoDeQueijo.SharePost">
+      <End Role="Share" EntitySet="ShareSet" />
+      <End Role="Post" EntitySet="PostSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Profile">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Email" Type="String" Nullable="false" />
+    <Property Name="FirstName" Type="String" Nullable="false" />
+    <Property Name="LastName" Type="String" Nullable="false" />
+    <Property Name="BirthDate" Type="DateTime" Nullable="false" />
+    <Property Name="PictureUrl" Type="String" Nullable="false" />
+    <NavigationProperty Name="Post" Relationship="CasaDoPaoDeQueijo.ProfilePost" FromRole="Profile" ToRole="Post" />
+    <NavigationProperty Name="Comment" Relationship="CasaDoPaoDeQueijo.ProfileComment" FromRole="Profile" ToRole="Comment" />
+    <NavigationProperty Name="Like" Relationship="CasaDoPaoDeQueijo.ProfileLike" FromRole="Profile" ToRole="Like" />
+    <NavigationProperty Name="Share" Relationship="CasaDoPaoDeQueijo.ProfileShare" FromRole="Profile" ToRole="Share" />
+  </EntityType>
+  <EntityType Name="Post">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Text" Type="String" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" />
+    <Property Name="Media" Type="String" Nullable="false" />
+    <NavigationProperty Name="Profile" Relationship="CasaDoPaoDeQueijo.ProfilePost" FromRole="Post" ToRole="Profile" />
+    <Property Name="ProfileId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Comment" Relationship="CasaDoPaoDeQueijo.PostComment" FromRole="Post" ToRole="Comment" />
+    <NavigationProperty Name="Like" Relationship="CasaDoPaoDeQueijo.PostLike" FromRole="Post" ToRole="Like" />
+    <NavigationProperty Name="Share" Relationship="CasaDoPaoDeQueijo.SharePost" FromRole="Post" ToRole="Share" />
+    <Property Name="ShareId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Comment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Text" Type="String" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="Profile" Relationship="CasaDoPaoDeQueijo.ProfileComment" FromRole="Comment" ToRole="Profile" />
+    <Property Name="ProfileId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Post" Relationship="CasaDoPaoDeQueijo.PostComment" FromRole="Comment" ToRole="Post" />
+    <Property Name="PostId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Like">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Liked" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Profile" Relationship="CasaDoPaoDeQueijo.ProfileLike" FromRole="Like" ToRole="Profile" />
+    <Property Name="ProfileId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Post" Relationship="CasaDoPaoDeQueijo.PostLike" FromRole="Like" ToRole="Post" />
+    <Property Name="PostId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Share">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Date" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="Profile" Relationship="CasaDoPaoDeQueijo.ProfileShare" FromRole="Share" ToRole="Profile" />
+    <Property Name="ProfileId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Post" Relationship="CasaDoPaoDeQueijo.SharePost" FromRole="Share" ToRole="Post" />
+  </EntityType>
+  <EntityType Name="Friendship">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstUser" Type="String" Nullable="false" />
+    <Property Name="SecondUser" Type="String" Nullable="false" />
+    <Property Name="Accepted" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <Association Name="ProfilePost">
+    <End Type="CasaDoPaoDeQueijo.Profile" Role="Profile" Multiplicity="1" />
+    <End Type="CasaDoPaoDeQueijo.Post" Role="Post" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profile">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Post">
+        <PropertyRef Name="ProfileId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProfileComment">
+    <End Type="CasaDoPaoDeQueijo.Profile" Role="Profile" Multiplicity="1" />
+    <End Type="CasaDoPaoDeQueijo.Comment" Role="Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profile">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="ProfileId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProfileLike">
+    <End Type="CasaDoPaoDeQueijo.Profile" Role="Profile" Multiplicity="1" />
+    <End Type="CasaDoPaoDeQueijo.Like" Role="Like" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profile">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Like">
+        <PropertyRef Name="ProfileId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProfileShare">
+    <End Type="CasaDoPaoDeQueijo.Profile" Role="Profile" Multiplicity="1" />
+    <End Type="CasaDoPaoDeQueijo.Share" Role="Share" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profile">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Share">
+        <PropertyRef Name="ProfileId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PostComment">
+    <End Type="CasaDoPaoDeQueijo.Post" Role="Post" Multiplicity="1" />
+    <End Type="CasaDoPaoDeQueijo.Comment" Role="Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Post">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="PostId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PostLike">
+    <End Type="CasaDoPaoDeQueijo.Post" Role="Post" Multiplicity="1" />
+    <End Type="CasaDoPaoDeQueijo.Like" Role="Like" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Post">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Like">
+        <PropertyRef Name="PostId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SharePost">
+    <End Type="CasaDoPaoDeQueijo.Share" Role="Share" Multiplicity="1" />
+    <End Type="CasaDoPaoDeQueijo.Post" Role="Post" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Share">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Post">
+        <PropertyRef Name="ShareId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

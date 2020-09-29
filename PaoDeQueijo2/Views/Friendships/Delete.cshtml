@@ -1,0 +1,48 @@
+﻿@model PaoDeQueijo2.Friendship
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Friendship</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstUser)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstUser)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SecondUser)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SecondUser)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Accepted)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Accepted)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

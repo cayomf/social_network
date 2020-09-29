@@ -1,0 +1,181 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CasaDoPaoDeQueijo.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="CasaDoPaoDeQueijoStoreContainer">
+    <EntitySet Name="ProfileSet" EntityType="CasaDoPaoDeQueijo.Store.ProfileSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PostSet" EntityType="CasaDoPaoDeQueijo.Store.PostSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CommentSet" EntityType="CasaDoPaoDeQueijo.Store.CommentSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="LikeSet" EntityType="CasaDoPaoDeQueijo.Store.LikeSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ShareSet" EntityType="CasaDoPaoDeQueijo.Store.ShareSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="FriendshipSet" EntityType="CasaDoPaoDeQueijo.Store.FriendshipSet" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="ProfilePost" Association="CasaDoPaoDeQueijo.Store.ProfilePost">
+      <End Role="Profile" EntitySet="ProfileSet" />
+      <End Role="Post" EntitySet="PostSet" />
+    </AssociationSet>
+    <AssociationSet Name="ProfileComment" Association="CasaDoPaoDeQueijo.Store.ProfileComment">
+      <End Role="Profile" EntitySet="ProfileSet" />
+      <End Role="Comment" EntitySet="CommentSet" />
+    </AssociationSet>
+    <AssociationSet Name="ProfileLike" Association="CasaDoPaoDeQueijo.Store.ProfileLike">
+      <End Role="Profile" EntitySet="ProfileSet" />
+      <End Role="Like" EntitySet="LikeSet" />
+    </AssociationSet>
+    <AssociationSet Name="ProfileShare" Association="CasaDoPaoDeQueijo.Store.ProfileShare">
+      <End Role="Profile" EntitySet="ProfileSet" />
+      <End Role="Share" EntitySet="ShareSet" />
+    </AssociationSet>
+    <AssociationSet Name="PostComment" Association="CasaDoPaoDeQueijo.Store.PostComment">
+      <End Role="Post" EntitySet="PostSet" />
+      <End Role="Comment" EntitySet="CommentSet" />
+    </AssociationSet>
+    <AssociationSet Name="PostLike" Association="CasaDoPaoDeQueijo.Store.PostLike">
+      <End Role="Post" EntitySet="PostSet" />
+      <End Role="Like" EntitySet="LikeSet" />
+    </AssociationSet>
+    <AssociationSet Name="SharePost" Association="CasaDoPaoDeQueijo.Store.SharePost">
+      <End Role="Share" EntitySet="ShareSet" />
+      <End Role="Post" EntitySet="PostSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="ProfileSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="BirthDate" Type="datetime" Nullable="false" />
+    <Property Name="PictureUrl" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PostSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="Media" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ProfileId" Type="int" Nullable="false" />
+    <Property Name="ShareId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CommentSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="ProfileId" Type="int" Nullable="false" />
+    <Property Name="PostId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LikeSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Liked" Type="bit" Nullable="false" />
+    <Property Name="ProfileId" Type="int" Nullable="false" />
+    <Property Name="PostId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ShareSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="ProfileId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FriendshipSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstUser" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SecondUser" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Accepted" Type="bit" Nullable="false" />
+  </EntityType>
+  <Association Name="ProfilePost">
+    <End Role="Profile" Type="CasaDoPaoDeQueijo.Store.ProfileSet" Multiplicity="1" />
+    <End Role="Post" Type="CasaDoPaoDeQueijo.Store.PostSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profile">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Post">
+        <PropertyRef Name="ProfileId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProfileComment">
+    <End Role="Profile" Type="CasaDoPaoDeQueijo.Store.ProfileSet" Multiplicity="1" />
+    <End Role="Comment" Type="CasaDoPaoDeQueijo.Store.CommentSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profile">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="ProfileId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProfileLike">
+    <End Role="Profile" Type="CasaDoPaoDeQueijo.Store.ProfileSet" Multiplicity="1" />
+    <End Role="Like" Type="CasaDoPaoDeQueijo.Store.LikeSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profile">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Like">
+        <PropertyRef Name="ProfileId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProfileShare">
+    <End Role="Profile" Type="CasaDoPaoDeQueijo.Store.ProfileSet" Multiplicity="1" />
+    <End Role="Share" Type="CasaDoPaoDeQueijo.Store.ShareSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profile">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Share">
+        <PropertyRef Name="ProfileId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PostComment">
+    <End Role="Post" Type="CasaDoPaoDeQueijo.Store.PostSet" Multiplicity="1" />
+    <End Role="Comment" Type="CasaDoPaoDeQueijo.Store.CommentSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Post">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="PostId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PostLike">
+    <End Role="Post" Type="CasaDoPaoDeQueijo.Store.PostSet" Multiplicity="1" />
+    <End Role="Like" Type="CasaDoPaoDeQueijo.Store.LikeSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Post">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Like">
+        <PropertyRef Name="PostId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SharePost">
+    <End Role="Share" Type="CasaDoPaoDeQueijo.Store.ShareSet" Multiplicity="1" />
+    <End Role="Post" Type="CasaDoPaoDeQueijo.Store.PostSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Share">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Post">
+        <PropertyRef Name="ShareId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

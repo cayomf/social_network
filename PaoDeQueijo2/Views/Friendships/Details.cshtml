@@ -1,0 +1,42 @@
+﻿@model PaoDeQueijo2.Friendship
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Friendship</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstUser)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstUser)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SecondUser)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SecondUser)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Accepted)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Accepted)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
